@@ -11,21 +11,17 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      # 1. Faz checkout do repositório
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2. Configura o Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "22"
 
-      # 3. Instala o Serverless Framework v3 (sem necessidade de login)
       - name: Install Serverless Framework v3
         run: npm install -g serverless@3
 
-      # 4. Configura credenciais da AWS
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -33,6 +29,5 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      # 5. Faz o deploy da Lambda
       - name: Deploy Lambda
         run: serverless deploy --stage dev
