@@ -12,7 +12,7 @@ functions:
     handler: handler.hello_world
     events:
       - http:
-          path: dev-hello-lambda
+          path: hello-lambda-dev-hello
           method: get
 
 package:
