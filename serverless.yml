@@ -1,4 +1,4 @@
-service: hello-lambda
+service: consultar-processos
 
 frameworkVersion: '>=3.0.0'
 provider:
@@ -9,10 +9,10 @@ provider:
 
 functions:
   hello:
-    handler: handler.hello_world
+    handler: handler.lambda_handler
     events:
       - http:
-          path: hello
+          path: processos
           method: get
 
 package:
