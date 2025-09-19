@@ -1,4 +1,4 @@
-name: Deploy Hello World Lambds
+name: Deploy Hello World Lambda
 
 on:
   push:
@@ -11,20 +11,28 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      # 1. Faz checkout do repositório
       - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          Node-version: "22"
+        uses: actions/checkout@v4
 
-      - name: Install Node
+      # 2. Configura o Node.js (corrigido: "node-version" e não "Node-version")
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      # 3. Instala o Serverless Framework globalmente
+      - name: Install Serverless Framework
         run: npm install -g serverless
 
-      - name: AWS Config
-        run: aws-actions/configure-aws-credentials@v1
+      # 4. Configura credenciais da AWS (corrigido: "uses:" no lugar de "run:")
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
+      # 5. Faz o deploy da Lambda usando Serverless
       - name: Deploy Lambda
         run: serverless deploy --stage dev
