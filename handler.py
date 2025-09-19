@@ -1,5 +1,7 @@
+import json
+
 def hello_world(event, context):
     return {
         'statusCode': 200,
-        'body': 'Hello, World!'
+        'body': json.dumps({'message': 'Hello, World!'})
     }

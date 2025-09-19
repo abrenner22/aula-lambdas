@@ -9,7 +9,7 @@ provider:
 
 functions:
   hello:
-    handler: helloworld.hello_world
+    handler: handler.hello_world
     events:
       - http:
           path: hello_lambda
